@@ -21,6 +21,7 @@ FetchContent_Declare(
     seastar
     GIT_REPOSITORY https://github.com/scylladb/seastar.git
     GIT_TAG 3699c0ce7ea98dc170e6d05148d900b5a649d882
+    #GIT_TAG 03db01b673b516f9309caaee9303d3163116133b
 )
 
 FetchContent_MakeAvailable(seastar)
@@ -44,12 +45,13 @@ target_link_libraries(my-library PRIVATE
     rt
     uring
     boost_program_options
+    boost_serialization
     protobuf
-#    stdc++
+    stdc++
     pthread
 )
 
 # Application
 add_executable(application main.cpp)
-target_link_libraries(application PRIVATE dl pthread m)
+target_link_libraries(application PRIVATE dl pthread rt stdc++)
 
